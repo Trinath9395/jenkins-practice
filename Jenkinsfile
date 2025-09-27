@@ -35,7 +35,16 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo "Hello, this is deploy"'
+                script {
+                    input {
+                        message "Should we continue?"
+                        ok "Yes, we should."
+                        submitter "alice,bob"
+                        parameters {
+                            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                        }
+                    }
+                }
             }
         }
     }
@@ -49,6 +58,5 @@ pipeline {
         success {
             echo "I will run pipeline is success"
         }
-        
     }
 }
