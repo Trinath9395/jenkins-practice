@@ -1,10 +1,10 @@
 pipeline {
     agent { label 'AGENT-1' }
     environment {
-        PROJECT = 'expense'
-        COMPONENT = 'backend'
+        PROJECT     = 'expense'
+        COMPONENT   = 'backend'
         ENVIRONMENT = 'dev'
-        DEPLOY_TO = "production"
+        DEPLOY_TO   = "production"
     }
     options {
         disableConcurrentBuilds()
@@ -35,6 +35,9 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when {
+                environment name: 'DEPLOY_TO', value: 'production'
+            }
            /*  input {
                 message "Should we continue?"
                 ok "Yes, we should."
@@ -43,28 +46,25 @@ pipeline {
                     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
                 }
             } */
-            when {
-                environment name: 'DEPLOY_TO', value: 'production'
-            }
             steps {
                 echo "Deploying..."
             }
-        stage ('prallel stages'){
+        }
+        stage('parallel stages') {
             parallel {
-                stage('stage -1'){
-                    steps{
-                       sh 'echo "Hello, this is stage-1"'
-                       sleep 15
+                stage('stage-1') {
+                    steps {
+                        sh 'echo "Hello, this is stage-1"'
+                        sleep 15
                     }
                 }
-                stage('stage-2'){
-                    steps{
+                stage('stage-2') {
+                    steps {
                         sh 'echo "Hello, this is stage-2"'
                         sleep 15
                     }
                 }
             }
-        }
         }
     }
     post {
