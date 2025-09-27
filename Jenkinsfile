@@ -16,5 +16,16 @@ pipeline {
                 sh 'echo "Hello, this is deploy"'
             }
         }
+    post {
+        always {
+            echo "I will always run this build"
+        }
+        failure {
+            echo "I will run pipeline is failed"
+        }
+        success {
+            echo "I will run pipeline is success"
+        }
+    }    
     }
 }
