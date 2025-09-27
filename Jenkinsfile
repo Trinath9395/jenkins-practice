@@ -49,6 +49,22 @@ pipeline {
             steps {
                 echo "Deploying..."
             }
+        stage ('prallel stages'){
+            parallel {
+                stage('stage -1'){
+                    steps{
+                       sh 'echo "Hello, this is stage-1"'
+                       sleep 15
+                    }
+                }
+                stage('stage-2'){
+                    steps{
+                        sh 'echo "Hello, this is stage-2"'
+                        sleep 15
+                    }
+                }
+            }
+        }
         }
     }
     post {
