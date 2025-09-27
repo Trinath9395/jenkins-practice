@@ -16,6 +16,7 @@ pipeline {
                 sh 'echo "Hello, this is deploy"'
             }
         }
+    }
     post {
         always {
             echo "I will always run this build"
@@ -26,6 +27,6 @@ pipeline {
         success {
             echo "I will run pipeline is success"
         }
-    }    
+        
     }
 }
