@@ -4,7 +4,7 @@ pipeline {
         PROJECT = 'expense'
         COMPONENT = 'backend'
         ENVIRONMENT = 'dev'
-        DEPLOY_TO = "QA"
+        DEPLOY_TO = "production"
     }
     options {
         disableConcurrentBuilds()
