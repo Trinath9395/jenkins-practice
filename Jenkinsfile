@@ -12,6 +12,7 @@ pipeline {
             steps {
                 sh 'echo "Hello, this is build"'
                 echo "Project: $PROJECT"
+                sleep 15
             }
         }
         stage('Test') {
